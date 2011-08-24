@@ -1,0 +1,7 @@
+A set of micro applications using embedded Jetty and assorted web technologies.
+
+The purpose is to provide a template application with embedded Jetty working properly.
+
+Based on http://info.rmatics.org/2009/10/17/jsf2_tutorial_0/
+
+For testing one must only run mvn jetty:run, war:inplace is NOT required to this setup to work.
