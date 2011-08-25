@@ -1,4 +1,4 @@
-package org.bogus;
+package com.jetty_plus;
 
 import javax.inject.Inject;
 

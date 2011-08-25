@@ -1,4 +1,4 @@
-package org.bogus;
+package com.jetty_plus;
 
 import org.apache.wicket.Page;
 import org.jboss.weld.wicket.WeldApplication;

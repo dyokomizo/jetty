@@ -1,4 +1,4 @@
-package org.bogus;
+package com.jetty_plus;
 
 public class HelloWorld {
 	private final String text = "Hello World!";
