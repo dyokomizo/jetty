@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.bogus</groupId>
-	<artifactId>weld_plus_jsf2</artifactId>
+	<artifactId>weld_plus_wicket</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>weld+jsf2</name>
+	<name>weld+wicket</name>
 	<repositories>
 		<!--
 			As of October 2009, a few of the weld dependencies were not yet on
@@ -30,7 +30,7 @@
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
 			<scope>provided</scope>
-			<version>1.0-CR1</version>
+			<version>1.0-CR2</version>
 		</dependency>
 
 		<dependency>
@@ -43,6 +43,24 @@
 			<groupId>javax.faces</groupId>
 			<artifactId>jsf-api</artifactId>
 			<version>2.0.0-RC</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.weld</groupId>
+			<artifactId>weld-wicket</artifactId>
+			<version>1.0.0-CR2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.wicket</groupId>
+			<artifactId>wicket</artifactId>
+			<version>1.4.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-nop</artifactId>
+			<version>1.4.2</version>
 		</dependency>
 
 		<!-- Jetty-specific scopes and artifacts -->
@@ -63,7 +81,7 @@
 		<dependency>
 			<groupId>org.jboss.weld.servlet</groupId>
 			<artifactId>weld-servlet</artifactId>
-			<version>1.0.0-CR1</version>
+			<version>1.0.0-CR2</version>
 			<scope>runtime</scope>
 		</dependency>
 
@@ -81,7 +99,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>weld+jsf2</finalName>
+		<finalName>weld+wicket</finalName>
 		<!--
 			changing outputDirectory so eclipse compile classes here and CDI
 			pick's up changes and hotdeploy function of jetty:run works properly
