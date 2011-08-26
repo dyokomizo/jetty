@@ -7,7 +7,7 @@ import org.apache.wicket.markup.html.basic.Label;
 
 public class HelloPage extends WebPage {
 	@Inject
-	private HelloWorld world;
+	private transient HelloWorld world;
 
 	public HelloPage() {
 		super();

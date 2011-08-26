@@ -106,6 +106,23 @@
 			without using war:inplace and restarting every time
 		-->
 		<outputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
+		<resources>
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<filtering>false</filtering>
+				<directory>src/main/java</directory>
+				<includes>
+					<!-- Copy all content files (e.g. html, images) -->
+					<include>**</include>
+				</includes>
+				<excludes>
+					<exclude>**/*.java</exclude>
+				</excludes>
+			</resource>
+		</resources>
 		<plugins>
 			<!-- Compiler plugin enforces Java 1.6 -->
 			<plugin>
@@ -131,6 +148,7 @@
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.26</version>
 				<configuration>
 					<!-- force friendly name instead of artifact name + version -->
 					<contextPath>${build.finalName}</contextPath>
@@ -139,6 +157,11 @@
 						declare datasource.
 					-->
 					<jettyEnvXml>${basedir}/src/main/resources/jetty-env.xml</jettyEnvXml>
+					<!--
+						Updated to not use useFileMappedBuffer, due to file locking on
+						windows
+					-->
+					<defaultsDescriptor>${basedir}/src/main/resources/webdefault.xml</defaultsDescriptor>
 					<!--
 						This parameter will auto-deploy modified classes...my personal
 						favorite Jetty feature.
@@ -165,4 +188,93 @@
 			</plugin>
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>executable-war</id>
+			<dependencies>
+				<!-- Embedded Jetty artifacts -->
+				<dependency>
+					<groupId>org.mortbay.jetty</groupId>
+					<artifactId>jetty</artifactId>
+					<version>6.1.26</version>
+					<scope>provided</scope>
+				</dependency>
+				<dependency>
+					<groupId>org.mortbay.jetty</groupId>
+					<artifactId>jsp-2.1-jetty</artifactId>
+					<version>6.1.26</version>
+					<scope>provided</scope>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-war-plugin</artifactId>
+						<version>2.1.1</version>
+						<configuration>
+							<archive>
+								<manifest>
+									<mainClass>com.jetty_plus.Main</mainClass>
+								</manifest>
+							</archive>
+						</configuration>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-resources-plugin</artifactId>
+						<version>2.3</version>
+						<configuration>
+							<encoding>UTF-8</encoding>
+						</configuration>
+						<executions>
+							<execution>
+								<id>copy-main-class-to-war-root</id>
+								<phase>prepare-package</phase>
+								<goals>
+									<goal>copy-resources</goal>
+								</goals>
+								<inherited>false</inherited>
+								<configuration>
+									<resources>
+										<resource>
+											<directory>${project.build.outputDirectory}</directory>
+											<includes>
+												<include>com/jetty_plus/Main.class</include>
+												<include>com/jetty_plus/Main$*.class</include>
+											</includes>
+										</resource>
+									</resources>
+									<outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<version>2.3</version>
+						<configuration>
+							<encoding>UTF-8</encoding>
+						</configuration>
+						<executions>
+							<execution>
+								<id>unpack-jetty-to-war-root</id>
+								<phase>prepare-package</phase>
+								<goals>
+									<goal>unpack-dependencies</goal>
+								</goals>
+								<inherited>false</inherited>
+								<configuration>
+									<includeGroupIds>org.mortbay.jetty,javax.servlet</includeGroupIds>
+									<excludes>**/*.html,**/*.css</excludes>
+									<outputDirectory>${project.build.directory}/${project.build.finalName}</outputDirectory>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
