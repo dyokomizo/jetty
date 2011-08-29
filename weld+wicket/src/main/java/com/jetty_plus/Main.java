@@ -1,6 +1,5 @@
 package com.jetty_plus;
 
-
 import java.net.URL;
 import java.security.ProtectionDomain;
 
