@@ -97,6 +97,20 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
+		<!-- Embedded Jetty artifacts -->
+		<dependency>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jetty</artifactId>
+			<version>6.1.26</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mortbay.jetty</groupId>
+			<artifactId>jsp-2.1-jetty</artifactId>
+			<version>6.1.26</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>weld+wicket</finalName>
@@ -191,21 +205,6 @@
 	<profiles>
 		<profile>
 			<id>executable-war</id>
-			<dependencies>
-				<!-- Embedded Jetty artifacts -->
-				<dependency>
-					<groupId>org.mortbay.jetty</groupId>
-					<artifactId>jetty</artifactId>
-					<version>6.1.26</version>
-					<scope>provided</scope>
-				</dependency>
-				<dependency>
-					<groupId>org.mortbay.jetty</groupId>
-					<artifactId>jsp-2.1-jetty</artifactId>
-					<version>6.1.26</version>
-					<scope>provided</scope>
-				</dependency>
-			</dependencies>
 			<build>
 				<plugins>
 					<plugin>
