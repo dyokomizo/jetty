@@ -24,6 +24,9 @@
 			</snapshots>
 		</repository>
 	</repositories>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<dependencies>
 		<!-- Common -->
 		<dependency>
@@ -37,65 +40,28 @@
 			<groupId>javax.annotation</groupId>
 			<artifactId>jsr250-api</artifactId>
 			<version>1.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.faces</groupId>
-			<artifactId>jsf-api</artifactId>
-			<version>2.0.0-RC</version>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.weld</groupId>
 			<artifactId>weld-wicket</artifactId>
 			<version>1.0.0-CR2</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
 			<artifactId>wicket</artifactId>
 			<version>1.4.1</version>
+			<scope>compile</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-nop</artifactId>
 			<version>1.4.2</version>
-		</dependency>
-
-		<!-- Jetty-specific scopes and artifacts -->
-		<dependency>
-			<groupId>javax.faces</groupId>
-			<artifactId>jsf-impl</artifactId>
 			<scope>runtime</scope>
-			<version>2.0.0-RC</version>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-			<scope>runtime</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jboss.weld.servlet</groupId>
-			<artifactId>weld-servlet</artifactId>
-			<version>1.0.0-CR2</version>
-			<scope>runtime</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.glassfish.web</groupId>
-			<artifactId>el-impl</artifactId>
-			<version>2.1.2-b04</version>
-			<scope>runtime</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.el</groupId>
-					<artifactId>el-api</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<!-- Embedded Jetty artifacts -->
@@ -182,6 +148,49 @@
 					-->
 					<scanIntervalSeconds>1</scanIntervalSeconds>
 				</configuration>
+				<dependencies>
+					<!-- Jetty-specific scopes and artifacts -->
+					<dependency>
+						<groupId>javax.faces</groupId>
+						<artifactId>jsf-api</artifactId>
+						<version>2.0.0-RC</version>
+						<scope>runtime</scope>
+					</dependency>
+
+					<dependency>
+						<groupId>javax.faces</groupId>
+						<artifactId>jsf-impl</artifactId>
+						<scope>runtime</scope>
+						<version>2.0.0-RC</version>
+					</dependency>
+
+					<dependency>
+						<groupId>javax.servlet</groupId>
+						<artifactId>jstl</artifactId>
+						<version>1.2</version>
+						<scope>runtime</scope>
+					</dependency>
+
+					<dependency>
+						<groupId>org.jboss.weld.servlet</groupId>
+						<artifactId>weld-servlet</artifactId>
+						<version>1.0.0-CR2</version>
+						<scope>runtime</scope>
+					</dependency>
+
+					<dependency>
+						<groupId>org.glassfish.web</groupId>
+						<artifactId>el-impl</artifactId>
+						<version>2.1.2-b04</version>
+						<scope>runtime</scope>
+						<exclusions>
+							<exclusion>
+								<groupId>javax.el</groupId>
+								<artifactId>el-api</artifactId>
+							</exclusion>
+						</exclusions>
+					</dependency>
+				</dependencies>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -205,6 +214,49 @@
 	<profiles>
 		<profile>
 			<id>executable-war</id>
+			<dependencies>
+				<!-- Jetty-specific scopes and artifacts -->
+				<dependency>
+					<groupId>javax.faces</groupId>
+					<artifactId>jsf-api</artifactId>
+					<version>2.0.0-RC</version>
+					<scope>runtime</scope>
+				</dependency>
+
+				<dependency>
+					<groupId>javax.faces</groupId>
+					<artifactId>jsf-impl</artifactId>
+					<scope>runtime</scope>
+					<version>2.0.0-RC</version>
+				</dependency>
+
+				<dependency>
+					<groupId>javax.servlet</groupId>
+					<artifactId>jstl</artifactId>
+					<version>1.2</version>
+					<scope>runtime</scope>
+				</dependency>
+
+				<dependency>
+					<groupId>org.jboss.weld.servlet</groupId>
+					<artifactId>weld-servlet</artifactId>
+					<version>1.0.0-CR2</version>
+					<scope>runtime</scope>
+				</dependency>
+
+				<dependency>
+					<groupId>org.glassfish.web</groupId>
+					<artifactId>el-impl</artifactId>
+					<version>2.1.2-b04</version>
+					<scope>runtime</scope>
+					<exclusions>
+						<exclusion>
+							<groupId>javax.el</groupId>
+							<artifactId>el-api</artifactId>
+						</exclusion>
+					</exclusions>
+				</dependency>
+			</dependencies>
 			<build>
 				<plugins>
 					<plugin>
